@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -11,41 +12,38 @@ import { Participant } from "../../components/Participant";
 import { styles } from "./styles";
 
 export const Home: React.FC = () => {
-  const participants: string[] = [
-    "Jeshua Ben",
-    "Nathália Spohr",
-    "Guilherme Spohr",
-    "Yasmalu Osíres",
-    "Jojo",
-    "Juju",
-    "Tia Beth",
-    "Seu Ivan",
-    "Rodrigo",
-  ];
+  const [participants, setParticipants] = useState<string[]>([]);
+  const [participantName, setParticipantName] = useState<string>("");
 
   const handleParticipantAdd = () => {
-    if (participants.includes("Rodrigo")) {
+    if (participants.includes(participantName)) {
       return Alert.alert(
         "Participante existe",
         "Não foi possível adicionar participante com este nome, pois já existe um participante com este nome"
       );
     }
-    console.log("Tá clicado, man!");
+    if (participantName.length === 0) {
+      return Alert.alert("Erro", "Digite um nome");
+    }
+
+    setParticipants((previous) => [...previous, participantName]);
+    setParticipantName("");
   };
 
   const handleRemoveParticipant = (name: string) => {
     Alert.alert("Remover", `Deseja remover ${name}?`, [
       {
         text: "Sim",
-        onPress: () => Alert.alert("DELETADO"),
+        onPress: () =>
+          setParticipants((prevState) =>
+            prevState.filter((participant) => participant !== name)
+          ),
       },
       {
         text: "Não",
         style: "cancel",
       },
     ]);
-
-    console.log(`Removeu ${name}`);
   };
 
   return (
@@ -60,6 +58,8 @@ export const Home: React.FC = () => {
           style={styles.input}
           placeholder="Nome do participante"
           placeholderTextColor="#6B6B6B"
+          onChangeText={setParticipantName}
+          value={participantName}
         />
 
         <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
