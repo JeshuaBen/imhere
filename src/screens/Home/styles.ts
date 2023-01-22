@@ -16,4 +16,40 @@ export const styles = StyleSheet.create({
     color: "#6B6B6B",
     fontSize: 16,
   },
+  input: {
+    flex: 1,
+    height: 56,
+    backgroundColor: "#1F1E25",
+    borderRadius: 5,
+    color: "#FFF",
+    padding: 16,
+    fontSize: 16,
+    marginRight: 12,
+  },
+
+  form: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 36,
+    marginBottom: 42,
+  },
+  button: {
+    width: 56,
+    height: 56,
+    borderRadius: 5,
+    backgroundColor: "#31CF67",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  clickHere: {
+    color: "#FFF",
+    fontSize: 24,
+  },
+
+  listEmptyText: {
+    fontSize: 14,
+    color: "#FFF",
+    textAlign: "center",
+  },
 });
